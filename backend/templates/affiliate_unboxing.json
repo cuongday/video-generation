@@ -1,0 +1,111 @@
+{
+  "id": "affiliate_unboxing",
+  "name": "Affiliate Unboxing",
+  "description": "Video unboxing sản phẩm với nhân vật ảo. Gồm: Intro → Unbox → Show sản phẩm → Trải nghiệm → CTA.",
+  "icon": "package-open",
+  "category": "affiliate",
+  "is_builtin": true,
+  "version": "1.0",
+  "flow": {
+    "steps": [
+      {
+        "id": "avatar",
+        "title": "Chọn nhân vật ảo",
+        "description": "Chọn hoặc tạo nhân vật ảo để unbox sản phẩm",
+        "components": ["AvatarSelector"],
+        "required": true
+      },
+      {
+        "id": "product",
+        "title": "Thông tin sản phẩm",
+        "description": "Nhập thông tin sản phẩm cần unbox",
+        "components": ["ProductForm", "ProductImageUploader"],
+        "required": true
+      },
+      {
+        "id": "space",
+        "title": "Không gian quay",
+        "description": "Chọn không gian phù hợp cho video unbox",
+        "components": ["SpaceSelector", "SpaceGenerator"],
+        "required": true
+      },
+      {
+        "id": "shots",
+        "title": "Cấu hình Shots",
+        "description": "Chọn các shot unbox cần có",
+        "components": ["ShotSelector"],
+        "required": true
+      },
+      {
+        "id": "script",
+        "title": "Kịch bản & Prompt",
+        "description": "Viết mô tả cho từng shot unbox",
+        "components": ["ScriptEditor", "PromptEnhancer"],
+        "required": true
+      },
+      {
+        "id": "generate",
+        "title": "Cấu hình & Tạo",
+        "description": "Chọn provider và bắt đầu tạo video",
+        "components": ["GenerationConfig", "ProviderSelector"],
+        "required": true
+      }
+    ]
+  },
+  "shots_config": {
+    "default_shots": ["intro", "unbox_package", "reveal_product", "examine", "use_product", "outro"],
+    "shot_definitions": {
+      "intro": {
+        "name": "Giới thiệu",
+        "duration": 5,
+        "camera": "medium",
+        "elements": ["avatar_upper_body"],
+        "prompt_template": "{avatar_description} in {space_description}, excited to unbox a new product. Holding the package. {lighting_prompt}. Cinematic energy, enthusiastic expression."
+      },
+      "unbox_package": {
+        "name": "Mở hộp",
+        "duration": 8,
+        "camera": "over_shoulder",
+        "elements": ["avatar_hands", "product"],
+        "prompt_template": "{avatar_description} opening {product_name} package. Close-up on hands unwrapping. {space_description}. {lighting_prompt}. Cinematic."
+      },
+      "reveal_product": {
+        "name": "Reveal sản phẩm",
+        "duration": 5,
+        "camera": "medium",
+        "elements": ["avatar_upper_body", "product"],
+        "prompt_template": "{avatar_description} revealing {product_name} from packaging. Excited expression. {space_description}. {lighting_prompt}. Product reveal shot."
+      },
+      "examine": {
+        "name": "Kiểm tra sản phẩm",
+        "duration": 10,
+        "camera": "closeup",
+        "elements": ["product", "avatar_hands"],
+        "prompt_template": "Close-up shot examining {product_name}. {product_description}. Natural hand examination. Clean product photography lighting. High detail."
+      },
+      "use_product": {
+        "name": "Trải nghiệm sản phẩm",
+        "duration": 10,
+        "camera": "wide",
+        "elements": ["avatar_full", "product"],
+        "prompt_template": "{avatar_description} using {product_name} in {space_description}. Natural demonstration of product. {lighting_prompt}. Cinematic wide shot."
+      },
+      "outro": {
+        "name": "Kết thúc & CTA",
+        "duration": 5,
+        "camera": "medium",
+        "elements": ["avatar_upper_body"],
+        "prompt_template": "{avatar_description} in {space_description}, recommending {product_name} to viewers. Confident smile. Link in bio. {lighting_prompt}. Cinematic outro."
+      }
+    }
+  },
+  "prompt_config": {
+    "default_style": "photorealistic, 8K, professional photography",
+    "default_lighting": "soft key light, natural fill, professional studio lighting"
+  },
+  "defaults": {
+    "aspect_ratio": "9:16",
+    "provider": "kling",
+    "image_provider": "nano_banana"
+  }
+}

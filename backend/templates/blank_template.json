@@ -1,0 +1,33 @@
+{
+  "id": "blank_template",
+  "name": "Blank Template",
+  "description": "Template trống để bạn tự tạo flow riêng. Thêm steps, components, và prompt templates theo ý muốn.",
+  "icon": "plus-square",
+  "category": "custom",
+  "is_builtin": true,
+  "version": "1.0",
+  "flow": {
+    "steps": [
+      {
+        "id": "custom_step_1",
+        "title": "Bước 1",
+        "description": "Thêm mô tả bước ở đây",
+        "components": ["PromptInput"],
+        "required": true
+      }
+    ]
+  },
+  "shots_config": {
+    "default_shots": [],
+    "shot_definitions": {}
+  },
+  "prompt_config": {
+    "default_style": "high quality, 8K, professional",
+    "default_lighting": "professional studio lighting"
+  },
+  "defaults": {
+    "aspect_ratio": "16:9",
+    "provider": "kling",
+    "image_provider": "nano_banana"
+  }
+}

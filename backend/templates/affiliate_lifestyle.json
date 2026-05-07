@@ -1,0 +1,29 @@
+{
+  "id": "affiliate_lifestyle",
+  "name": "Affiliate Lifestyle",
+  "description": "Video quảng cáo sản phẩm theo phong cách lifestyle — nhân vật ảo sử dụng sản phẩm trong không gian sống thực. Phù hợp cho Instagram Reels, TikTok.",
+  "icon": "home",
+  "category": "affiliate",
+  "is_builtin": true,
+  "version": "1.0",
+  "flow": {
+    "steps": [
+      { "id": "avatar", "title": "Chọn nhân vật ảo", "description": "Chọn avatar phong cách lifestyle", "components": ["AvatarSelector"], "required": true },
+      { "id": "product", "title": "Sản phẩm", "description": "Thông tin sản phẩm", "components": ["ProductForm"], "required": true },
+      { "id": "space", "title": "Không gian", "description": "Chọn không gian sống: phòng khách, bếp, phòng ngủ, ngoài trời...", "components": ["SpaceSelector", "SpaceGenerator"], "required": true },
+      { "id": "shots", "title": "Shots", "description": "Cấu hình các shot", "components": ["ShotSelector"], "required": true },
+      { "id": "script", "title": "Kịch bản", "description": "Mô tả nội dung", "components": ["ScriptEditor"], "required": true },
+      { "id": "generate", "title": "Tạo video", "description": "Bắt đầu tạo", "components": ["GenerationConfig"], "required": true }
+    ]
+  },
+  "shots_config": {
+    "default_shots": ["lifestyle_intro", "product_in_context", "usage_lifestyle", "lifestyle_outro"],
+    "shot_definitions": {
+      "lifestyle_intro": { "name": "Mở đầu", "duration": 5, "camera": "medium", "elements": ["avatar_upper_body"], "prompt_template": "{avatar_description} in a beautiful {space_description}, relaxed and welcoming. Natural warm lighting. Lifestyle content, inviting atmosphere." },
+      "product_in_context": { "name": "Sản phẩm trong không gian", "duration": 5, "camera": "medium_wide", "elements": ["product", "space"], "prompt_template": "{product_name} beautifully placed in {space_description}. Warm natural lighting. Lifestyle photography. Aspirational home aesthetic. High quality." },
+      "usage_lifestyle": { "name": "Sử dụng sản phẩm", "duration": 15, "camera": "medium", "elements": ["avatar_full", "product"], "prompt_template": "{avatar_description} using {product_name} naturally in {space_description}. Relaxed, authentic lifestyle moment. Golden hour lighting. Cinematic. Warm atmosphere." },
+      "lifestyle_outro": { "name": "Kết thúc", "duration": 5, "camera": "medium", "elements": ["avatar_upper_body"], "prompt_template": "{avatar_description} in {space_description}, smiling at camera. Lifestyle influencer style. Natural light. Authentic and warm. Call to action." }
+    }
+  },
+  "defaults": { "aspect_ratio": "9:16", "provider": "kling", "image_provider": "nano_banana" }
+}

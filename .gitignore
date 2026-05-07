@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.py[cod]
+*.db
+*.db-journal
+.env
+venv/
+.venv/
+*.egg-info/
+dist/
+build/
+
+# Frontend
+node_modules/
+.env
+.env.local
+dist/
+*.tsbuildinfo
+
+# Outputs (generated files)
+outputs/
+*.mp4
+*.png
+*.jpg
+*.webp
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log

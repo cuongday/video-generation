@@ -1,0 +1,31 @@
+{
+  "id": "cinematic_short_film",
+  "name": "Cinematic Short Film",
+  "description": "Tạo video ngắn theo phong cách điện ảnh. Mô tả cảnh, chọn style, tạo multi-scene và ghép lại thành phim ngắn.",
+  "icon": "film",
+  "category": "cinematic",
+  "is_builtin": true,
+  "version": "1.0",
+  "flow": {
+    "steps": [
+      { "id": "genre", "title": "Thể loại", "description": "Chọn thể loại phim", "components": ["GenreSelector"], "required": true },
+      { "id": "scene", "title": "Mô tả cảnh", "description": "Mô tả cảnh quay bằng ngôn ngữ tự nhiên", "components": ["PromptInput", "PromptEnhancer"], "required": true },
+      { "id": "style", "title": "Phong cách", "description": "Chọn phong cách hình ảnh", "components": ["StyleSelector", "MoodSelector"], "required": true },
+      { "id": "camera", "title": "Camera", "description": "Chọn movement camera", "components": ["CameraSelector", "DurationSlider"], "required": false },
+      { "id": "generate", "title": "Tạo video", "description": "Bắt đầu tạo", "components": ["GenerationConfig"], "required": true }
+    ]
+  },
+  "shots_config": {
+    "default_shots": ["opening", "climax", "resolution"],
+    "shot_definitions": {
+      "opening": { "name": "Mở đầu", "duration": 10, "camera": "cinematic_wide", "elements": ["scene"], "prompt_template": "{scene_description}. {style_description}. {mood_description}. {camera_movement}. Cinematic film grain. Anamorphic lens. Dramatic lighting." },
+      "climax": { "name": "Cao trào", "duration": 15, "camera": "dynamic", "elements": ["scene"], "prompt_template": "{scene_description}. {style_description}. {mood_description}. Intense {camera_movement}. Cinematic. Dramatic lighting shift." },
+      "resolution": { "name": "Kết thúc", "duration": 10, "camera": "slow_pan", "elements": ["scene"], "prompt_template": "{scene_description}. {style_description}. {mood_description}. {camera_movement}. Cinematic fade out. Emotional conclusion." }
+    }
+  },
+  "prompt_config": {
+    "default_style": "cinematic film, anamorphic lens, film grain, 4K, dramatic color grading",
+    "default_lighting": "dramatic cinematic lighting, high contrast"
+  },
+  "defaults": { "aspect_ratio": "16:9", "provider": "sora", "image_provider": "nano_banana" }
+}

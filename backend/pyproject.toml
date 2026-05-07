@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "video-generator"
+version = "0.1.0"
+description = "AI Video Generator Tool with Template System and Virtual Avatar"
+requires-python = ">=3.10"
+dependencies = [
+    "fastapi>=0.115.0",
+    "uvicorn[standard]>=0.32.0",
+    "sqlalchemy>=2.0.36",
+    "aiosqlite>=0.20.0",
+    "pydantic>=2.10.0",
+    "pydantic-settings>=2.6.0",
+    "python-multipart>=0.0.20",
+    "cryptography>=44.0.0",
+    "httpx>=0.28.1",
+    "google-genai>=1.0.0",
+    "pillow>=11.1.0",
+    "moviepy>=2.2.0",
+    "python-dotenv>=1.0.1",
+    "jsonschema>=4.23.0",
+    "aiofiles>=24.1.0",
+    "python-jose[cryptography]>=3.3.0",
+    "passlib[bcrypt]>=1.7.4",
+]

@@ -1,0 +1,74 @@
+{
+  "id": "ai_influencer_creator",
+  "name": "AI Influencer Creator",
+  "description": "Tạo nhân vật ảo (AI Influencer) với ngoại hình tùy chỉnh, nhiều góc mặt và trang phục khác nhau. Dùng để tạo avatar cho các video affiliate, tutorial, hay social media.",
+  "icon": "user-circle",
+  "category": "avatar",
+  "is_builtin": true,
+  "version": "1.0",
+  "flow": {
+    "steps": [
+      {
+        "id": "avatar_name",
+        "title": "Đặt tên Avatar",
+        "description": "Đặt tên và thêm tags để dễ quản lý nhân vật ảo của bạn",
+        "components": ["AvatarNameStep"],
+        "required": true
+      },
+      {
+        "id": "identity",
+        "title": "Giới tính & Ethnicity",
+        "description": "Chọn giới tính và nguồn gốc ethnicity cho nhân vật ảo",
+        "components": ["GenderEthnicityStep"],
+        "required": true
+      },
+      {
+        "id": "face",
+        "title": "Tùy chỉnh Gương mặt",
+        "description": "Tinh chỉnh chi tiết gương mặt: mắt, mũi, miệng, tai, da, tóc, lông mày",
+        "components": ["FaceBiometricsForm"],
+        "required": true
+      },
+      {
+        "id": "body_outfit",
+        "title": "Thân thể & Trang phục",
+        "description": "Mô tả thân thể và chọn trang phục cho nhân vật ảo",
+        "components": ["BodyOutfitForm", "AccessoryPicker"],
+        "required": true
+      },
+      {
+        "id": "generate_reference",
+        "title": "Tạo Ảnh Reference",
+        "description": "Xem prompt tổng hợp và tạo ảnh reference qua nano-banana",
+        "components": ["PromptPreview", "AngleSelector"],
+        "required": true
+      },
+      {
+        "id": "multi_asset",
+        "title": "Tạo Assets Bổ sung",
+        "description": "Tạo ảnh nhiều góc mặt và nhiều trang phục khác nhau",
+        "components": ["OutfitMultiSelector", "ExpressionSelector"],
+        "required": false
+      },
+      {
+        "id": "save",
+        "title": "Lưu Avatar",
+        "description": "Đặt tên và lưu avatar vào thư viện",
+        "components": ["AvatarSaveForm"],
+        "required": true
+      }
+    ]
+  },
+  "shots_config": {},
+  "prompt_config": {
+    "avatar_prompt_template": "{style} of a {age}-year-old {gender} with {ethnicity} features. {face_description}. {hair_description}. {body_description}. {accessories_description}. {lighting}. {background}. Hyperrealistic, detailed skin texture, 8K resolution.",
+    "default_style": "photorealistic portrait",
+    "default_lighting": "professional studio lighting, soft key light from left, subtle rim light",
+    "default_background": "clean white studio background"
+  },
+  "defaults": {
+    "aspect_ratio": "1:1",
+    "image_provider": "nano_banana",
+    "video_provider": "kling"
+  }
+}

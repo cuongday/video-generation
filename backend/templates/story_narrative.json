@@ -1,0 +1,27 @@
+{
+  "id": "story_narrative",
+  "name": "Story Narrative",
+  "description": "Kể chuyện với video. Tạo video ngắn kể một câu chuyện với nhiều scene, nhân vật và plot.",
+  "icon": "book",
+  "category": "storytelling",
+  "is_builtin": true,
+  "version": "1.0",
+  "flow": {
+    "steps": [
+      { "id": "setup", "title": "Cài đặt", "description": "Nhập thông tin cơ bản về câu chuyện", "components": ["PromptInput"], "required": true },
+      { "id": "scenes", "title": "Các Scene", "description": "Mô tả từng scene trong câu chuyện", "components": ["ScriptEditor"], "required": true },
+      { "id": "style", "title": "Phong cách", "description": "Chọn phong cách điện ảnh", "components": ["StyleSelector", "MoodSelector"], "required": true },
+      { "id": "generate", "title": "Tạo video", "description": "Bắt đầu tạo", "components": ["GenerationConfig"], "required": true }
+    ]
+  },
+  "shots_config": {
+    "default_shots": ["setup", "conflict", "climax", "resolution"],
+    "shot_definitions": {
+      "setup": { "name": "Thiết lập", "duration": 10, "camera": "wide", "elements": ["scene"], "prompt_template": "{scene_description}. {style_description}. {mood_description}. Establishing shot. Cinematic. {camera_movement}." },
+      "conflict": { "name": "Xung đột", "duration": 15, "camera": "medium", "elements": ["scene"], "prompt_template": "{scene_description}. Rising tension. {style_description}. {mood_description}. {camera_movement}. Cinematic drama." },
+      "climax": { "name": "Cao trào", "duration": 15, "camera": "dynamic", "elements": ["scene"], "prompt_template": "{scene_description}. Peak emotional moment. {style_description}. Dramatic lighting. {camera_movement}. Cinematic intensity." },
+      "resolution": { "name": "Giải quyết", "duration": 10, "camera": "slow", "elements": ["scene"], "prompt_template": "{scene_description}. Resolution. {style_description}. {mood_description}. {camera_movement}. Cinematic closure." }
+    }
+  },
+  "defaults": { "aspect_ratio": "16:9", "provider": "sora", "image_provider": "nano_banana" }
+}

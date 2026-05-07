@@ -1,0 +1,107 @@
+{
+  "id": "affiliate_product_review",
+  "name": "Affiliate Product Review",
+  "description": "Video quảng cáo sản phẩm với nhân vật ảo giới thiệu. Phù hợp cho TikTok, Reels, YouTube Shorts. Gồm: Intro → Cận cảnh sản phẩm → Nhân vật nói → Sử dụng sản phẩm → Outro.",
+  "icon": "shopping-bag",
+  "category": "affiliate",
+  "is_builtin": true,
+  "version": "1.0",
+  "flow": {
+    "steps": [
+      {
+        "id": "avatar",
+        "title": "Chọn nhân vật ảo",
+        "description": "Chọn hoặc tạo nhân vật ảo để giới thiệu sản phẩm",
+        "components": ["AvatarSelector"],
+        "required": true
+      },
+      {
+        "id": "product",
+        "title": "Thông tin sản phẩm",
+        "description": "Nhập thông tin sản phẩm bạn muốn giới thiệu",
+        "components": ["ProductForm", "ProductImageUploader"],
+        "required": true
+      },
+      {
+        "id": "space",
+        "title": "Không gian quay",
+        "description": "Chọn hoặc tạo không gian/background cho video",
+        "components": ["SpaceSelector", "SpaceGenerator"],
+        "required": true
+      },
+      {
+        "id": "shots",
+        "title": "Cấu hình Shots",
+        "description": "Chọn các shot cần có trong video và điều chỉnh thứ tự",
+        "components": ["ShotSelector"],
+        "required": true
+      },
+      {
+        "id": "script",
+        "title": "Kịch bản & Prompt",
+        "description": "Viết mô tả cho từng shot. Hệ thống sẽ tự tạo prompt chuẩn.",
+        "components": ["ScriptEditor", "PromptEnhancer"],
+        "required": true
+      },
+      {
+        "id": "generate",
+        "title": "Cấu hình & Tạo",
+        "description": "Chọn provider, aspect ratio và bắt đầu tạo video",
+        "components": ["GenerationConfig", "ProviderSelector"],
+        "required": true
+      }
+    ]
+  },
+  "shots_config": {
+    "default_shots": ["intro", "product_closeup", "avatar_talking", "product_usage", "outro"],
+    "shot_definitions": {
+      "intro": {
+        "name": "Giới thiệu",
+        "duration": 5,
+        "camera": "medium",
+        "elements": ["avatar_upper_body"],
+        "prompt_template": "Professional AI presenter {avatar_description} standing in {space_description}, welcoming viewers with a warm smile. {lighting_prompt}. Cinematic. Natural energy."
+      },
+      "product_closeup": {
+        "name": "Cận cảnh sản phẩm",
+        "duration": 5,
+        "camera": "closeup",
+        "elements": ["product"],
+        "prompt_template": "Close-up product shot of {product_name}. {product_description}. Clean studio lighting on product. High detail, sharp focus. Product photography style."
+      },
+      "avatar_talking": {
+        "name": "Nhân vật nói",
+        "duration": 10,
+        "camera": "medium",
+        "elements": ["avatar_upper_body"],
+        "prompt_template": "{avatar_description} in {space_description}. {script_segment}. Natural hand gestures while speaking. {lighting_prompt}. Cinematic quality, direct eye contact with camera."
+      },
+      "product_usage": {
+        "name": "Sử dụng sản phẩm",
+        "duration": 10,
+        "camera": "wide",
+        "elements": ["avatar_full", "product"],
+        "prompt_template": "{avatar_description} demonstrating {product_name} in {space_description}. Natural product interaction. {product_usage_description}. {lighting_prompt}. Cinematic wide shot."
+      },
+      "outro": {
+        "name": "Kết thúc",
+        "duration": 5,
+        "camera": "medium",
+        "elements": ["avatar_upper_body"],
+        "prompt_template": "{avatar_description} in {space_description}, giving call-to-action with confident smile. Buy link in description. {lighting_prompt}. Cinematic outro."
+      }
+    }
+  },
+  "prompt_config": {
+    "avatar_prompt_template": "{avatar_name} AI influencer, {gender}, {ethnicity} features",
+    "space_prompt_template": "{space_type} background. {style}. {lighting_description}. Clean, professional look.",
+    "default_style": "photorealistic, 8K, professional photography",
+    "default_lighting": "soft key light from left, subtle fill, professional studio lighting"
+  },
+  "defaults": {
+    "aspect_ratio": "9:16",
+    "duration_per_shot": 10,
+    "provider": "kling",
+    "image_provider": "nano_banana"
+  }
+}

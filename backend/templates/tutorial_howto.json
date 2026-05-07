@@ -1,0 +1,29 @@
+{
+  "id": "tutorial_howto",
+  "name": "Tutorial / How-to",
+  "description": "Video hướng dẫn từng bước. Phù hợp cho giáo dục, review, hướng dẫn sử dụng. Chia thành nhiều steps.",
+  "icon": "book-open",
+  "category": "educational",
+  "is_builtin": true,
+  "version": "1.0",
+  "flow": {
+    "steps": [
+      { "id": "topic", "title": "Chủ đề", "description": "Nhập chủ đề bạn muốn hướng dẫn", "components": ["PromptInput"], "required": true },
+      { "id": "steps", "title": "Các bước", "description": "Liệt kê các bước thực hiện", "components": ["ScriptEditor"], "required": true },
+      { "id": "style", "title": "Phong cách", "description": "Chọn phong cách trình bày", "components": ["StyleSelector", "AvatarSelector"], "required": true },
+      { "id": "generate", "title": "Tạo video", "description": "Bắt đầu tạo", "components": ["GenerationConfig"], "required": true }
+    ]
+  },
+  "shots_config": {
+    "default_shots": ["intro", "step_1", "step_2", "step_3", "step_4", "conclusion"],
+    "shot_definitions": {
+      "intro": { "name": "Giới thiệu", "duration": 5, "camera": "medium", "elements": ["avatar"], "prompt_template": "Professional presenter {avatar_description} welcoming viewers to a tutorial. {space_description}. Clean, bright educational setting. Friendly and knowledgeable." },
+      "step_1": { "name": "Bước 1", "duration": 15, "camera": "medium_closeup", "elements": ["avatar", "demo"], "prompt_template": "{avatar_description} demonstrating Step 1: {step_description}. {space_description}. Clear demonstration. {lighting_prompt}. Educational quality." },
+      "step_2": { "name": "Bước 2", "duration": 15, "camera": "medium_closeup", "elements": ["avatar", "demo"], "prompt_template": "{avatar_description} demonstrating Step 2: {step_description}. {space_description}. Clear demonstration. {lighting_prompt}." },
+      "step_3": { "name": "Bước 3", "duration": 15, "camera": "medium_closeup", "elements": ["avatar", "demo"], "prompt_template": "{avatar_description} demonstrating Step 3: {step_description}. {space_description}. {lighting_prompt}." },
+      "step_4": { "name": "Bước 4", "duration": 15, "camera": "medium_closeup", "elements": ["avatar", "demo"], "prompt_template": "{avatar_description} demonstrating Step 4: {step_description}. {space_description}. {lighting_prompt}." },
+      "conclusion": { "name": "Kết luận", "duration": 5, "camera": "medium", "elements": ["avatar"], "prompt_template": "{avatar_description} wrapping up tutorial. Encouraging viewers. {space_description}. {lighting_prompt}." }
+    }
+  },
+  "defaults": { "aspect_ratio": "16:9", "provider": "kling", "image_provider": "nano_banana" }
+}
