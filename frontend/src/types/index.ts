@@ -149,6 +149,8 @@ export interface SpaceAsset {
   lighting?: string;
   category: string;
   tags: string[];
+  is_active: boolean;
+  created_at: string;
 }
 
 export interface Job {

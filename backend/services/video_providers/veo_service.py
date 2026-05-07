@@ -2,6 +2,7 @@ from pathlib import Path
 import httpx
 import asyncio
 import base64
+import os
 
 from google import genai
 from google.genai import types
@@ -15,17 +16,21 @@ class VeoProvider(BaseProvider):
     """
     Google Veo 3.1 video generation via Gemini API + google-genai SDK.
     Supports text-to-video and image-to-video (up to 8 seconds, 720p/1080p/4k).
-    Uses GEMINI_API_KEY for authentication.
+    Uses ADC (Application Default Credentials) + Vertex AI for authentication.
     """
 
     provider_name = "veo"
 
     def __init__(
         self,
-        api_key: str,
+        api_key: str | None = None,
         model: str = "veo-3.1-generate-preview",
     ):
-        self.client = genai.Client(api_key=api_key)
+        self.client = genai.Client(
+            vertexai=True,
+            project=os.environ.get("GOOGLE_CLOUD_PROJECT"),
+            location=os.environ.get("GOOGLE_CLOUD_LOCATION", "global"),
+        )
         self.model = model
         self._operations: dict[str, types.GenerateVideosOperation] = {}
 

@@ -1,5 +1,5 @@
 import { Outlet, Link, useLocation } from 'react-router-dom';
-import { Video, LayoutDashboard, FolderOpen, History, Settings, Plus, Users } from 'lucide-react';
+import { Video, LayoutDashboard, FolderOpen, History, Settings, Plus, Users, LayoutGrid } from 'lucide-react';
 import { cn } from '../../lib/utils';
 
 const navItems = [
@@ -61,6 +61,13 @@ export default function Layout() {
             >
               <Users className="w-4 h-4" />
               Avatar Library
+            </Link>
+            <Link
+              to="/space/library"
+              className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-teal-600 hover:bg-teal-50 transition-colors"
+            >
+              <LayoutGrid className="w-4 h-4" />
+              Không gian
             </Link>
           </div>
         </nav>

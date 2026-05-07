@@ -94,8 +94,14 @@ export const generateMultiOutfit = (avatarId: string, outfits: string[]) =>
 export const getSpaces = (params?: { limit?: number; offset?: number }) =>
   api.get('/spaces', { params }).then(r => r.data);
 
+export const getSpace = (id: string) =>
+  api.get(`/spaces/${id}`).then(r => r.data);
+
 export const createSpace = (data: object) =>
   api.post('/spaces', data).then(r => r.data);
+
+export const deleteSpace = (id: string) =>
+  api.delete(`/spaces/${id}`).then(r => r.data);
 
 export const generateSpace = (data: object) =>
   api.post('/spaces/generate', data).then(r => r.data);

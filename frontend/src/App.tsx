@@ -9,6 +9,7 @@ import Dashboard from './pages/Dashboard';
 import Projects from './pages/Projects';
 import History from './pages/History';
 import Settings from './pages/Settings';
+import SpaceLibrary from './pages/SpaceLibrary';
 
 export default function App() {
   return (
@@ -20,6 +21,7 @@ export default function App() {
         <Route path="/project/:projectId" element={<FlowRunner />} />
         <Route path="/avatar/create" element={<AvatarCreator />} />
         <Route path="/avatar/library" element={<AvatarLibrary />} />
+        <Route path="/space/library" element={<SpaceLibrary />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/projects" element={<Projects />} />
         <Route path="/history" element={<History />} />

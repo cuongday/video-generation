@@ -1,4 +1,5 @@
 from pathlib import Path
+import os
 from typing import Any
 import logging
 import asyncio
@@ -24,7 +25,11 @@ class NanoBananaProvider(BaseProvider):
 
     def __init__(self, model: str = "gemini-3.1-flash-image-preview"):
         logger.info(f"Initializing NanoBananaProvider with model: {model}")
-        self.client = genai.Client()
+        self.client = genai.Client(
+            vertexai=True,
+            project=os.environ.get("GOOGLE_CLOUD_PROJECT"),
+            location=os.environ.get("GOOGLE_CLOUD_LOCATION", "global"),
+        )
         self.model = model
         self._pending_jobs: dict[str, str] = {}
 

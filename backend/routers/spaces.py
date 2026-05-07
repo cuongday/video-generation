@@ -6,8 +6,7 @@ from sqlalchemy import select
 from pydantic import BaseModel, Field
 
 from database import get_db
-from models import SpaceAsset, APIKey
-from utils.crypto import decrypt_api_key
+from models import SpaceAsset
 from utils.file_utils import save_image_from_url
 
 
@@ -73,28 +72,25 @@ async def generate_space(
     background_tasks: BackgroundTasks,
     db: AsyncSession = Depends(get_db),
 ):
-    key_result = await db.execute(
-        select(APIKey).where(
-            APIKey.provider.in_(["nano_banana"]),
-            APIKey.is_active == True,
-        ).limit(1)
-    )
-    api_key_record = key_result.scalar_one_or_none()
-    if not api_key_record:
-        raise HTTPException(status_code=400, detail="No nano-banana API key")
-
-    decrypted = decrypt_api_key(api_key_record.encrypted_key)
-
-    # Generate space image
+    # Generate space image via ADC + Vertex AI
     from services.image_providers.nano_banana_service import NanoBananaProvider
-    provider = NanoBananaProvider(decrypted)
+    provider = NanoBananaProvider()
 
     full_prompt = f"{req.prompt}. {req.style} interior design, {req.lighting}, 8K, hyperrealistic."
-    imgs = await provider.generate_image(
-        prompt=full_prompt,
-        aspect_ratio=req.aspect_ratio,
-        quality="hd",
-    )
+    try:
+        imgs = await provider.generate_image(
+            prompt=full_prompt,
+            aspect_ratio=req.aspect_ratio,
+            quality="hd",
+        )
+    except Exception as e:
+        error_str = str(e)
+        if "RESOURCE_EXHAUSTED" in error_str or "429" in error_str:
+            raise HTTPException(
+                status_code=429,
+                detail="Hạn mức sử dụng Gemini API (Free tier) đã hết. Vui lòng đợi 1-2 phút rồi thử lại, hoặc nâng cấp plan trên Google AI Studio."
+            )
+        raise HTTPException(status_code=500, detail=f"Lỗi khi tạo hình ảnh: {error_str}")
 
     img = imgs[0]
     if img.url:
